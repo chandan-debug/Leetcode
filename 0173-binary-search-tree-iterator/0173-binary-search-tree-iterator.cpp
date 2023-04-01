@@ -17,6 +17,12 @@ public:
     }
     /*retrun whether we have a next smallest number*/
     
+     bool hasNext() {  
+        return !mystack.empty();     
+    }
+     
+    /* return the next smallest number*/
+    
     int next() {
         TreeNode* tempNode=mystack.top(); 
         mystack.pop();
@@ -24,11 +30,7 @@ public:
         return tempNode->val;   
     }
       
-    bool hasNext() {  
-        return !mystack.empty();     
-    }
-     
-    /* return the next smallest number*/
+   
     private:
     void pushAll(TreeNode *node){
         for(; node!=NULL ; mystack.push(node), node=node->left);
