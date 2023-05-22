@@ -41,7 +41,7 @@ public:
             return 0;
         
         int inv = 0;
-        int mid = low + (high - low) / 2;
+        int mid = low + (high-low ) / 2;
         
         inv += mergesort(nums, low, mid);
         inv += mergesort(nums, mid + 1, high);
