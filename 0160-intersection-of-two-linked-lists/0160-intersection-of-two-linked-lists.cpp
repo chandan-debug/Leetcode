@@ -9,40 +9,16 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode *curr=headA;
-        int a=0,b=0;
-        while(curr){
-            a++;
-            curr=curr->next;
-        }
-        curr=headB;
-        while(curr){
-            b++;
-            curr=curr->next;
-        }
-        
-        int diff=abs(a-b);
-        
-         if(a<b){
-             while(diff--){
-                 headB=headB->next;
-               
-             }
-         }
-        else{
-            while(diff--){
-            headA=headA->next;
-            }
-        }
-        
-        while(headA and headB){
-            if(headA==headB){
-                return headA;
-            }
-              headA=headA->next;
-             headB=headB->next;
-        }
+        if(headA== NULL || headB== NULL)
         return NULL;
-        
+        ListNode* a=headA;
+        ListNode* b=headB;
+        // if a & b have different length, then we will stop the loop after second iteration
+        while(a!=b){
+            //for the end of first iteration, we just reset the pointer to the head of another linkedlist
+            a=a==NULL ? headB:a->next;
+            b=b==NULL ? headA:b->next;
+        }
+        return a;
     }
 };
