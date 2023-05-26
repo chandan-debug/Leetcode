@@ -11,36 +11,34 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        ListNode* slow=head;
-        ListNode* fast=head;
-        //slow is the middlle
-        while(fast!=NULL && fast->next!=NULL){
+        if(head==NULL || head->next==NULL)
+            return true;
+        ListNode* slow=head, *fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL){
             slow=slow->next;
             fast=fast->next->next;
         }
-        // for odd case
-        if(fast!=NULL && fast->next!=NULL){
-            slow=slow->next;
-        }
-        ListNode* prev=NULL;
-        // revrese halfback
-        while(slow!=NULL && slow->next!=NULL){
-            ListNode* temp=slow->next;
-            slow->next=prev;
-            prev=slow;
-            slow=temp;
-        }
-        if(slow!=NULL){
-            slow->next=prev;
-        }
-        fast=head;
-        while(slow!=NULL and fast!=NULL ){
-            if(slow->val!=fast->val){
+        slow->next=reverseList(slow->next);
+        slow=slow->next;
+        
+        while(slow!=NULL){
+            if(head->val!=slow->val)
                 return false;
-            }
+            
+            head=head->next;
             slow=slow->next;
-            fast=fast->next;
         }
         return true;
+        
+    }
+    ListNode* reverseList(ListNode* head){
+        ListNode* pre=NULL, *next=NULL;
+            while(head!=NULL){
+                next=head->next;
+                head->next=pre;
+                pre=head;
+                head=next;
+            }
+        return pre;
     }
 };
