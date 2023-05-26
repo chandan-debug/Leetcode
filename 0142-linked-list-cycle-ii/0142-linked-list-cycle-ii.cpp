@@ -24,7 +24,7 @@ public:
                 slow=slow->next;
                 entry=entry->next;
                 }
-                 return slow;
+                 return entry;
             }
            
         }
