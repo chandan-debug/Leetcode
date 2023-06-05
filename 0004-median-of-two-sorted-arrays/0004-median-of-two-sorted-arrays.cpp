@@ -19,8 +19,8 @@ public:
             
             if (left1 <= right2 && left2 <= right1) {
                 if ((n1 + n2) % 2 == 0) {
-                    double median = (max(left1, left2) + min(right1, right2)) / 2.0;
-                    return median;
+                      return  (max(left1, left2) + min(right1, right2)) / 2.0;
+                   
                 } else {
                     return max(left1, left2);
                 }
