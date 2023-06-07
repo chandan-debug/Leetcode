@@ -16,17 +16,16 @@ public:
         return val;
     }
     
-    int peek() {
-        if(output.empty()){
-            while(input.empty()==false){
-                output.push(input.top());
-                input.pop();
-            }
+   int peek() {
+    if (output.empty() == true) {
+        while (input.empty() == false) {
+            output.push(input.top());
+            input.pop();
         }
-        return output.top();
-        
     }
-    
+    return output.top();
+}
+
     bool empty() {
         return input.empty() && output.empty();
         
