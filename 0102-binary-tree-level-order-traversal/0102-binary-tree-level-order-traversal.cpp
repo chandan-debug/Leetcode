@@ -18,25 +18,23 @@ public:
          if(root==NULL)
              return ans;
          
-        while(1){// infinite loop
-            int size=q.size();
-            if(size==0)  // break
-                return ans;
-            vector<int> data;
-            while(size>0){
-            TreeNode* temp=q.front();
-            q.pop();
-            data.push_back(temp->val);
-            if(temp->left!=NULL)
-                q.push(temp->left);
+              while(!q.empty()) {
+                  int size=q.size();
+            vector<int> level; 
+                  for(int i=0;i<size;i++){
+            TreeNode *temp = q.front(); 
+            q.pop(); 
             
-            if(temp->right!=NULL)
-                q.push(temp->right);
-                size--;
-            }
-            ans.push_back(data);
+            if(temp->left != NULL) 
+                q.push(temp->left); 
+            if(temp->right != NULL) 
+                q.push(temp->right); 
+                
+            level.push_back(temp->val); 
         }
+                  ans.push_back(level);
+              }
         return ans;
         
-    }
+    }   
 };
