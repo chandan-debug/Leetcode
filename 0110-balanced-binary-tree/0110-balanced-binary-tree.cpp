@@ -11,32 +11,23 @@
  */
 class Solution {
 public:
-    int height(TreeNode* root){
-        if(root==NULL)
-        return 0;
-        else
-            return max(height(root->left),height(root->right))+1;
-        }
-        
-        
-        void inorderutil(TreeNode* root, bool & ans) {
-            if(root!=NULL){
-                inorderutil(root->left,ans);
-                int lh=height(root->left);
-                int rh=height(root->right);
-                if(abs(lh-rh)>1)
-                    ans=ans&&false;
-                inorderutil(root->right,ans);
-                
-            }
-        }
-    
     bool isBalanced(TreeNode* root) {
-        bool ans=true;
-        inorderutil(root,ans);
-        return ans;
+        return dfsheight(root)!=-1;
         
-            
+    }
+    
+    int dfsheight(TreeNode* root){
+        if(root==NULL)
+            return 0;
+        int lh=dfsheight(root->left);
+        if(lh==-1)
+            return -1;
+        int rh=dfsheight(root->right);
+        if(rh==-1)
+            return-1;
+        if(abs(lh-rh)>1)
+            return -1;
         
+        return  1+max(lh,rh);
     }
 };
