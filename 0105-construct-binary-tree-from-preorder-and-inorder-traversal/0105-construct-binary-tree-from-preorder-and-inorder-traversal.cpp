@@ -11,31 +11,24 @@
  */
 class Solution {
 public:
-    int preindex=0;
-    
-    TreeNode* buildTreeutil(vector<int>& preorder, vector<int>& inorder, int s, int e){
-        if(s>e) 
+    TreeNode* buildtree(vector<int>& preorder, int prestart,int preend,vector<int>& inorder,int instart,int inend,map<int,int>& inmap){
+        if(prestart>preend|| instart>inend)
             return NULL;
-        
-        TreeNode* root=new TreeNode(preorder[preindex]);
-        preindex++;
-        
-        int inindex;
-        for(int i=s;i<=e;i++){
-            if(inorder[i]==root->val){
-                inindex=i;
-            break;
-            }
-        }
-        root->left=buildTreeutil(preorder,inorder,s,inindex-1);
-        root->right=buildTreeutil(preorder,inorder,inindex+1,e);
-        
+        TreeNode* root= new TreeNode(preorder[prestart]);
+        int inroot=inmap[root->val];
+        int numsleft=inroot-instart;
+        root->left=buildtree(preorder,prestart+1,prestart+numsleft,inorder,instart,inroot-1,inmap);
+        root->right=buildtree(preorder,prestart+numsleft+1,preend,inorder,inroot+1,inend,inmap);
+
         return root;
-        
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        TreeNode* ans=buildTreeutil(preorder,inorder,0,inorder.size()-1);
-        return ans;
+        map<int,int>inmap;
+        for(int i=0;i<inorder.size();i++){
+            inmap[inorder[i]]=i;
+        }
+        TreeNode* root=buildtree(preorder,0,preorder.size()-1,inorder,0,inorder.size()-1,inmap);
+        return root;
         
     }
 };
