@@ -14,7 +14,7 @@ class BSIIterator{
     stack<TreeNode *> mystack;
     // reverse->true ->before
     //reverse->false->next
-    bool reverse=true;
+    bool reverse=true; // reverse here is before
     public:
     
     BSIIterator(TreeNode *root, bool isReverse){
