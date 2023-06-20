@@ -1,40 +1,34 @@
 class Solution {
 public:
-    
-    bool isvalid(int i, int j,int n ,int m, vector<vector<char>>& grid)
-        {
-            if(i>=0 && i<n && j>=0 && j<m && grid[i][j]=='1')
-                return true ;
-        
-                return false;
+    void dfs(vector<vector<char>>& grid, int r, int c){
+        int row = grid.size();
+        int col = grid[0].size();
+        if(r >= row || c >= col || r < 0 || c < 0 || grid[r][c] == '0' || grid[r][c] == '2')
+            return;
+        if(grid[r][c] == '1'){
+            grid[r][c] = '2';
+            dfs(grid, r-1, c);
+            dfs(grid, r+1, c);
+            dfs(grid, r, c+1);
+            dfs(grid, r, c-1);
         }
-    void numIslandsrec(int i, int j, int n, int m, vector<vector<char>>& grid ){
-        grid[i][j]='0';
-        
-        if(isvalid(i+1,j,n,m,grid))
-            numIslandsrec(i+1,j,n,m,grid);
-        
-         if(isvalid(i-1,j,n,m,grid))
-            numIslandsrec(i-1,j,n,m,grid);
-        
-         if(isvalid(i,j+1,n,m,grid))
-            numIslandsrec(i,j+1,n,m,grid);
-        
-         if(isvalid(i,j-1,n,m,grid))
-            numIslandsrec(i,j-1,n,m,grid);
+        return;
     }
-    
     int numIslands(vector<vector<char>>& grid) {
-        
-       int n=grid.size();
-        int m=grid[0].size();
-        int ans=0;
-        
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(grid[i][j]=='1'){
+        int r = grid.size();
+        int c = grid[0].size();
+        int ans = 0;
+        for(int i = 0; i < r; i++){
+            for(int j = 0; j < c; j++){
+                if(r < 0 || c < 0 || grid[i][j] == '0' || grid[i][j] == '2')
+                    continue;
+                if(grid[i][j] == '1'){
                     ans++;
-                    numIslandsrec(i,j,n,m,grid);
+                    grid[i][j] = '2';
+                    dfs(grid, i-1, j);
+                    dfs(grid, i+1, j);
+                    dfs(grid, i, j+1);
+                    dfs(grid, i, j-1);
                 }
             }
         }
