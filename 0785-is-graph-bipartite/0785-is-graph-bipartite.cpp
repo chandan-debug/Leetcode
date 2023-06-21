@@ -11,17 +11,17 @@ public:
     }
 
     bool bfs(int A, int B, vector<int>& color , vector<vector<int>>& graph){
-          queue<int> v;
-          v.push(B);
-          while(!v.empty()){
-              int node = v.front();
-              v.pop();
-              for(auto edge:graph[node]){
-                  if(color[edge] == -1){
-                      color[edge] = !color[node];
-                      v.push(edge);
+          queue<int> q;
+          q.push(B);
+          while(!q.empty()){
+              int node = q.front();
+              q.pop();
+              for(auto it:graph[node]){
+                  if(color[it] == -1){
+                      color[it] = !color[node];
+                      q.push(it);
                   }
-                  else if(color[edge] == color[node])
+                  else if(color[it] == color[node])
                    return false;
               }
           }
