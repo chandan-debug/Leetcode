@@ -9,7 +9,6 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
 class BSIIterator{
     stack<TreeNode *> mystack;
     // reverse->true ->before
