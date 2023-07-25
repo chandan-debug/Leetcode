@@ -26,13 +26,18 @@ public:
             int mid=left+(right-left)/2;
             
             if(arr[mid]<arr[mid+1]){
+                 // We are on the ascending part of the mountain.
+                // Move left pointer to mid + 1.
                 left=mid+1;
             }
             else{
+                 // We are on the descending part of the mountain.
+                // Move right pointer to mid.
                 right=mid;
             }
         }
-        return left;
+        // At the end of the loop, left == right, and it will be pointing to the peak element.
+        return left; // or right (they both have the same value)
         
         
     }
