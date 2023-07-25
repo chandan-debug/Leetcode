@@ -39,6 +39,7 @@ public:
         // At the end of the loop, left == right, and it will be pointing to the peak element.
         return left; // or right (they both have the same value)
         
-        
+        //TC: O(log N)
+       //SC: O(1)
     }
 };
