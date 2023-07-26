@@ -27,3 +27,6 @@ public:
         return time<=hour;
     }
 };
+
+// TC=O(N*log(M))
+//     SC=O(1)
