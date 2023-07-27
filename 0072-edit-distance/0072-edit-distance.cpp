@@ -1,42 +1,34 @@
 class Solution {
 public:
-     int minDistance(string word1, string word2) {
-        int m = word1.length();
-        int n = word2.length();
-    
-        // Create a table to store the minimum edit distance between substrings of word1 and word2
-        int dp[m+1][n+1];
-    
-        // Initialize the table for the base cases
-        for (int i = 0; i <= m; i++) {
-            dp[i][0] = i;
+    int solve(string&a , string&b,int i,int j,vector<vector<int>>& dp){
+        //base case
+        if(i==a.length()){
+            return (b.length()-j);
         }
-        for (int j = 0; j <= n; j++) {
-            dp[0][j] = j;
+        if(j==b.length()){
+            return (a.length()-i);
         }
-    
-        // Compute the minimum edit distance for all substrings of word1 and word2
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
-                if (word1[i-1] == word2[j-1]) {
-                    // Last characters match, no operation required
-                    dp[i][j] = dp[i-1][j-1];
-                } 
-                else {
-                    // Insert a character into word1
-                    int insertOp = dp[i][j-1]; 
-                    // Delete a character from word1
-                    int deleteOp = dp[i-1][j]; 
-                    // Replace a character in word1 with a character in word2
-                    int replaceOp = dp[i-1][j-1]; 
-                    // Take the minimum of the three operations and add 1
-                    dp[i][j] = 1 + min({insertOp, deleteOp, replaceOp});
-                }
-            }
+        if(dp[i][j]!=-1){
+            return dp[i][j];
         }
-        // Return the minimum edit distance between the entire strings
-        return dp[m][n];
-        
+        int ans=0;
+        if(a[i]==b[j]){
+             return solve(a,b,i+1,j+1,dp);
+        }
+        else{
+            //insert
+         int   insertans=1+solve(a,b,i,j+1,dp);
+            // delete
+          int  deleteans=1+solve(a,b,i+1,j,dp);
+            // replace
+          int  replaceans=1+solve(a,b,i+1,j+1,dp);
+         ans = min(insertans, min(deleteans, replaceans));   
+        }
+        return dp[i][j]= ans;
+    }
+    int minDistance(string word1, string word2) {
+        vector<vector<int>> dp(word1.size(),vector<int>(word2.size(),-1));
+        return solve(word1,word2,0,0,dp);
         
     }
 };
