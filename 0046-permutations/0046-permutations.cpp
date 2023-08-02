@@ -9,6 +9,7 @@ public:
         for(int i=ind;i<nums.size();i++){
             swap(nums[ind],nums[i]);
             permute(ind+1,nums,ans);
+            // bactrtack
             swap(nums[ind],nums[i]);
         }
     }
