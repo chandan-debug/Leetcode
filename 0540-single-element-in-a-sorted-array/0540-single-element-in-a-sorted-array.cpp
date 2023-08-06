@@ -1,27 +1,18 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        int left = 0;
-        int right = nums.size() - 1;
-
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            
-            if (mid % 2 == 0) {
-                // mid is at an even index
-                if (nums[mid] == nums[mid + 1])
-                    left = mid + 2;
-                else
-                    right = mid;
-            } else {
-                // mid is at an odd index
-                if (nums[mid] == nums[mid - 1])
-                    left = mid + 1;
-                else
-                    right = mid;
+        int low=0,high=nums.size()-2;
+        while(low<=high){
+            int mid=(low+high)>>1;
+            if(nums[mid]==nums[mid^1]){
+                low=mid+1;
             }
-        }
-
-        return nums[left];
+                
+                else{
+                    high=mid-1;
+                }
+            
+            }
+        return nums[low];
     }
 };
