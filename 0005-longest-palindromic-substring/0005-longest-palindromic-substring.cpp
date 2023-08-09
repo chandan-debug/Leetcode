@@ -17,7 +17,7 @@ public:
         for(int i=1;i<n;i++){
 
             // we will check for odd length substring
-            int left = i , right = i;
+            int left = i-1 , right = i;
 
             // if we are not out bound & character are matching 
             // and we will calculate current length
@@ -42,7 +42,7 @@ public:
 
 
             // we will check for even length substring
-            left = i-1 , right = i;
+            left = i-1 , right = i+1;
 
             // if we are not out bound & character are matching 
             // and we will calculate current length
