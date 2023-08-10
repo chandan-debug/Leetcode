@@ -1,23 +1,19 @@
-class Solution {
+class Solution {               
 public:
     bool isAnagram(string s, string t) {
-        if (s.length() != t.length()) {
+        if(s.length() != t.length()){
             return false;
         }
-        
-        vector<int> count(26, 0); // Character count array
-        
-        for (int i = 0; i < s.length(); i++) {
-            count[s[i] - 'a']++; // Increment count for characters in s
-            count[t[i] - 'a']--; // Decrement count for characters in t
+        int arr[26] = {0};
+        for(int i=0; i<s.length(); i++){
+            arr[s[i]-'a']++;
+            arr[t[i]-'a']--;
         }
-        
-        for (int i = 0; i < 26; i++) {
-            if (count[i] != 0) {
-                return false; // If any count is non-zero, strings are not anagrams
+        for(int i=0; i<26; i++){
+            if(arr[i] != 0){
+                return false;
             }
         }
-        
-        return true; // All counts are zero, strings are anagrams
+        return true;
     }
 };
