@@ -3,21 +3,10 @@ public:
     int strStr(string haystack, string needle) {
         int n1=haystack.size();
         int n2=needle.size();
-        if(n2>n1)
-            return -1;
-       int j=0, i=0,start=0;
-        while(i<n1 &&j<n2){
-            if(haystack[i]==needle[j]){
-                if(i-start+1==n2){
-                    return start;
-                }
-                j++;
-                i++;
-            }
-            else{
-                j=0;
-                start++;
-                i=start;
+        
+        for(int i=0;i<n1-n2+1;i++){
+            if(haystack.substr(i,n2)==needle){
+                return i;
             }
         }
         return -1;
