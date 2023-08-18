@@ -11,7 +11,7 @@ public:
     ListNode *detectCycle(ListNode *head) {
         unordered_set<ListNode*> visited;
         
-        while (head != nullptr) {
+        while (head != NULL) {
             if (visited.find(head) != visited.end()) {
                 return head;
             }
@@ -19,6 +19,6 @@ public:
             head = head->next;
         }
         
-        return nullptr; // No cycle found
+        return NULL; // No cycle found
     }
 };
