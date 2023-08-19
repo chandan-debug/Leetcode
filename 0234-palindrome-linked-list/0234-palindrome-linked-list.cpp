@@ -11,34 +11,43 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if(head==NULL || head->next==NULL)
+        if (head == NULL || head->next == NULL) {
             return true;
-        ListNode* slow=head, *fast=head;
-        while(fast->next!=NULL && fast->next->next!=NULL){
-            slow=slow->next;
-            fast=fast->next->next;
         }
-        slow->next=reverseList(slow->next);
-        slow=slow->next;
         
-        while(slow!=NULL){
-            if(head->val!=slow->val)
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        // Find the middle of the linked list
+        while (fast->next != NULL && fast->next->next != NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        // Reverse the second half of the linked list
+        slow->next = reverselist(slow->next);
+        slow = slow->next;
+        
+        // Compare the reversed second half with the first half
+        while (slow != NULL) {
+            if (slow->val != head->val) {
                 return false;
-            
-            head=head->next;
-            slow=slow->next;
-        }
-        return true;
-        
-    }
-    ListNode* reverseList(ListNode* head){
-        ListNode* pre=NULL, *next=NULL;
-            while(head!=NULL){
-                next=head->next;
-                head->next=pre;
-                pre=head;
-                head=next;
             }
-        return pre;
+            slow = slow->next;
+            head = head->next;
+        }
+        
+        return true;
+    }
+    
+    ListNode* reverselist(ListNode* head) {
+        ListNode* dummy = NULL;
+        while (head != NULL) {
+            ListNode* next = head->next;
+            head->next = dummy;
+            dummy = head;
+            head = next;
+        }
+        return dummy;
     }
 };
