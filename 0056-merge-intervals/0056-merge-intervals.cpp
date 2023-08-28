@@ -12,11 +12,15 @@ public:
             }
             else{
                 vector<int>&v=ans.back();
+                //end of previous interval comapre with i's start
                 int y=v[1];
-            
+            //if overlap
+                
             if(intervals[i][0]<=y){
                 v[1]=max(y,intervals[i][1]);
             }
+                //not overlap
+                
             else{
                 ans.push_back(intervals[i]);
             }
