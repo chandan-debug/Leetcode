@@ -1,72 +1,59 @@
+
 class LRUCache {
+    // Data members
+    map<int, int> m;               // Map to store key-value pairs
+    map<int, list<int>::iterator> address; // Map to store iterators to the linked list nodes
+    list<int> l;                   // Doubly linked list to maintain the order of keys
+    int cap;                       // Maximum capacity of the cache
+    int size;                      // Current number of elements in the cache
+
 public:
-    class node{
-        public:
-        int key;
-        int val;
-        node* next;
-        node* prev;
-        node(int _key,int _val){
-            key=_key;
-            val=_val;
-        }
-    };
-    node* head=new node(-1,-1);
-    node* tail=new node(-1,-1);
-    int cap;
-    unordered_map<int,node*>m;
+    // Constructor to initialize the cache
     LRUCache(int capacity) {
-        cap=capacity;
-        head->next=tail;
-        tail->next=head;
-        
+        cap = capacity;
+        size = 0;
     }
-    void addnode(node* newnode){
-        node* temp=head->next;
-        newnode->next=temp;
-        newnode->prev=head;
-        head->next=newnode;
-        temp->prev=newnode;
+
+    // Method to get the value for a given key
+    int get(int key) {
+        if (m.find(key) == m.end()) return -1;
+
+        // Move the key to the front of the list (most recently used)
+        list<int>::iterator it = address[key];
+        l.erase(it);
+        address.erase(key);
+        l.push_front(key);
+        address[key] = l.begin();
+
+        return m[key];
     }
-    
-    void deletenode(node* delnode){
-        node* delprev=delnode->prev;
-        node* delnext=delnode->next;
-        delprev->next=delnext;
-        delnext->prev=delprev;
-    }
-    int get(int key_) {
-        if(m.find(key_)!=m.end()){
-            node* resnode=m[key_];
-            int res=resnode->val;
-            m.erase(key_);
-            deletenode(resnode);
-            addnode(resnode);
-            m[key_]=head->next;
-            return res;
+
+    // Method to put a key-value pair into the cache
+    void put(int key, int value) {
+        if (m.find(key) != m.end()) {
+            // Key already exists, remove old entry
+            l.erase(address[key]);
+            address.erase(key);
+            m.erase(key);
+            size--;
         }
-        return -1;
-        
+        if (size == cap) {
+            // Cache is full, remove the least recently used element
+            int k = l.back();
+            l.pop_back();
+            address.erase(k);
+            m.erase(k);
+            size--;
+        }
+        // Add the new key-value pair to the cache
+        size++;
+        l.push_front(key);
+        address[key] = l.begin();
+        m[key] = value;
     }
-    
-    void put(int key_, int value) {
-        if(m.find(key_)!=m.end()){
-            node* existingnode=m[key_];
-            m.erase(key_);
-            deletenode(existingnode);
-        }
-        if(m.size()==cap){
-            m.erase(tail->prev->key);
-            deletenode(tail->prev);
-        }
-        addnode(new node(key_,value));
-        m[key_]=head->next;
+
+    // Public method to get the value for a given key
+    int getValue(int key) {
+        return get(key);
     }
 };
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache* obj = new LRUCache(capacity);
- * int param_1 = obj->get(key);
- * obj->put(key,value);
- */
