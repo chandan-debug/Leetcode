@@ -12,8 +12,8 @@ return;}
 solve(nums,output,i+1,ans);
 
 //include
-int element =nums[i];
-output.push_back(element);
+
+output.push_back(nums[i]);
 solve(nums,output,i+1,ans);
 } 
 
