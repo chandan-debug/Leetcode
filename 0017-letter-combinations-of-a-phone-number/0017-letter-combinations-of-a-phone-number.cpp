@@ -1,32 +1,32 @@
 class Solution {
-public:
-    void helper(string digits,int i,string cur,vector<string> &ans,unordered_map<char,string> &m)
-    {
-        if(i == digits.size())
-        {
-            ans.push_back(cur);
+    private:
+    
+    void solve(int i, string digits, string ds,vector<string>&ans, string map[]){
+        //base case
+        if(i>=digits.size()){
+            ans.push_back(ds);
             return;
         }
-
-        for(int j=0;j<m[digits[i]].size();j++)
-        {
-            string key = m[digits[i]];
-            helper(digits,i+1,cur + key[j],ans,m);
+        int number=digits[i]-'0';
+        string value=map[number];
+        
+        for(int j=0;j<value.size();j++){
+            ds.push_back(value[j]);
+            solve(i+1,digits,ds,ans,map);
+            ds.pop_back();
         }
+        
     }
-    vector<string> letterCombinations(string digits) 
-    {
-        if(digits.size() == 0)
-            return {};
-
-        unordered_map<char,string> m = {{'2',"abc"},
-        {'3',"def"},{'4',"ghi"},{'5',"jkl"},{'6',"mno"},
-        {'7',"pqrs"},{'8',"tuv"},{'9',"wxyz"}};
-
-        string cur = "";
-        vector<string> ans;
-
-        helper(digits,0,cur,ans,m);
+public:
+    vector<string> letterCombinations(string digits) {
+     vector<string> ans;
+        if(digits.size()==0){
+            return ans;
+        }
+        string ds;
+        string map[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        solve(0,digits,ds,ans,map);
         return ans;
+            
     }
 };
