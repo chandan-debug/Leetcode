@@ -1,27 +1,28 @@
 class Solution {
 private:
-void solve(vector<int> nums, vector<int> output, int i,vector<vector<int>>& ans){
+void solve(vector<int> nums, vector<int> ds, int i,vector<vector<int>>& ans){
 
 //basecase
 
-if(i>=nums.size()){
-ans.push_back(output);
+if(i==nums.size()){
+ans.push_back(ds);
 return;}
 
 //exclude
-solve(nums,output,i+1,ans);
+solve(nums,ds,i+1,ans);
 
 //include
 
-output.push_back(nums[i]);
-solve(nums,output,i+1,ans);
+ds.push_back(nums[i]);
+solve(nums,ds,i+1,ans);
+    ds.pop_back();
 } 
 
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> ans;
-        vector<int> output;
-        solve(nums,output,0,ans);
+        vector<int> ds;
+        solve(nums,ds,0,ans);
         return ans;
     }
 };
