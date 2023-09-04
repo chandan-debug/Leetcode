@@ -7,7 +7,7 @@ public:
                 swap(nums[j],nums[i]);
                 i++;
             }
-            cout<<endl;
+         
         }
         
     }
