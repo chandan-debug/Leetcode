@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    vector<int> inorder(TreeNode*root,vector<int>&ans){
+    vector<int> inorder(TreeNode* root, vector<int>& ans){
         if(root!=NULL){
             inorder(root->left,ans);
             ans.push_back(root->val);
@@ -21,7 +21,7 @@ public:
     }
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> ans;
-        return inorder(root,ans);
+         return inorder(root,ans);
         
     }
 };
