@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    vector<int> postorder(TreeNode* root,vector<int>&ans){
+    vector<int> postorder(TreeNode* root,vector<int>& ans){
         if(root!=NULL){
             postorder(root->left,ans);
             postorder(root->right,ans);
