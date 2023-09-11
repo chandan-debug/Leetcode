@@ -10,30 +10,23 @@
  * };
  */
 class Solution {
-    int count=0;
-    int ans=0;
-    
-    void recursion(TreeNode* root, int k){
-        if(root->left!=NULL){
-            recursion(root->left,k);
-        }
+public:
+    void solve(TreeNode* root,int& k,int& count, int& ans){
+        if(root==NULL)
+            return;
+        solve(root->left,k,count,ans);
         count++;
         if(count==k){
             ans=root->val;
             return;
         }
-        if(root->right!=NULL){
-        recursion(root->right,k);
+        solve(root->right,k,count,ans);
     }
-    }
-   public: 
-    int kthSmallest(TreeNode* root, int &k){
-    
-        recursion(root,k);
+    int kthSmallest(TreeNode* root, int k) {
+       int count=0,ans=0;
+         solve(root,k,count,ans);
         return ans;
-    }
+       
         
-    
-    
-   
+    }
 };
