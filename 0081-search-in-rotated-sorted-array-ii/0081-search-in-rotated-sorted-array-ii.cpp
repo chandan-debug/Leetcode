@@ -13,8 +13,8 @@ public:
             
             // Handle duplicates
             if (nums[low] == nums[mid] && nums[mid] == nums[high]) {
-                ++low;
-                --high;
+            low++;
+             high--;
             }
             // Left half sorted
             else if (nums[low] <= nums[mid]) {
