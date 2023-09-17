@@ -1,16 +1,16 @@
 class Solution {
 public:
-    bool search(vector<int>& nums, int target) {
+    int search(vector<int>& nums, int target) {
         int low = 0;
         int high = nums.size() - 1;
-
+        
         while (low <= high) {
             int mid = low + (high - low) / 2;
-
+            
             if (nums[mid] == target) {
                 return true;
             }
-
+            
             // Handle duplicates
             if (nums[low] == nums[mid] && nums[mid] == nums[high]) {
                 ++low;
@@ -33,6 +33,7 @@ public:
                 }
             }
         }
+        
         return false;
     }
 };
