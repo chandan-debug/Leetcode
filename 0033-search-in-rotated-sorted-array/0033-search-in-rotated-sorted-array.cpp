@@ -20,7 +20,7 @@ public:
                     low=mid+1;
                 }
             }
-            
+            // right half sorted
             else{
                 if(target>nums[mid] && target<=nums[high]){
                     low=mid+1;
