@@ -1,42 +1,28 @@
 class Solution {
 public:
     int lastStoneWeight(vector<int>& stones) {
-        int n = stones.size();
-        priority_queue<int> pq;
+        while (stones.size() > 1) {
+            // Sort the stones in descending order.
+            sort(stones.begin(), stones.end(), greater<int>());
 
-        for (int i = 0 ; i < n ; i ++)
-        {
-            pq.push(stones[i]);
+            // Take the two heaviest stones.
+            int y = stones[0];
+            int x = stones[1];
+
+            // Remove the two heaviest stones.
+            stones.erase(stones.begin());
+            stones.erase(stones.begin());
+
+            // Calculate the remaining stone's weight.
+            int remainingWeight = abs(y - x);
+
+            // If there's still a stone left, insert it back into the vector.
+            if (remainingWeight != 0) {
+                stones.push_back(remainingWeight);
+            }
         }
 
-        int x , y;
-        while (n != 1)
-        {
-            y = pq.top();
-            pq.pop();
-
-            x = pq.top();
-            pq.pop();
-
-            if (x == y)
-            {    
-                n = n-2;
-                if (n == 0)
-            return 0;
-                continue;
-            }
-            else
-            {
-                y = y-x;
-                pq.push(y);
-            }
-            n--;
-
-            if (n == 0)
-            return 0;
-        }
-
-        int lastWeight = pq.top();
-        return lastWeight;
+        // If there's a stone left, return its weight; otherwise, return 0.
+        return (stones.empty() ? 0 : stones[0]);
     }
 };
