@@ -16,14 +16,12 @@ class Solution
     {
         int i=0;
         int j=str.size()-1;
-        
         while(i<=j){
-            swap(str[i],str[j]);
-            i++;
-            j--;
+            swap(str[i++],str[j--]);
         }
         return str;
     }
+   
 };
 
 
