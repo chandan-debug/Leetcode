@@ -1,17 +1,23 @@
 class Solution {
 public:
-    int repeatedStringMatch(std::string a, std::string b) {
-        std::string A = a;
-        int s = 1;
-        int repeat = b.length() / a.length();
-        for (int i = 0; i < repeat + 2; i++) {
-            if (a.find(b) != string::npos) {
-                return s;
-            } else {
-                a += A;
-                s++;
-            }
-        }
+    int repeatedStringMatch(string s, string b) {
+          
+          if(s==b) return 1;  
+         
+          
+         int count =0;  
+         string str=s;
+         while(s.length()<=10000) 
+         { 
+              count++; 
+              int q=s.find(b);
+         if(q!=-1) 
+         { 
+             return count ;
+         } 
+              s+=str;
+         } 
         return -1;
+
     }
 };
