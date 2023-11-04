@@ -1,23 +1,21 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        int left=0;
-        int right=s.size()-1;
-        
-        while(left<right){
-            // skip the non alaphabet from left side
-            while(left<right && !isalnum(s[left]))
-                left++;
-            
-             // skip the non alaphabet from right side
-            while(left<right && !isalnum(s[right]))
-                right--;
-            
-            //convert the char to lower case and compare 
-            
-            if(tolower(s[left])!=tolower(s[right]))
+        // Clean the string by removing non-alphanumeric characters and converting to lowercase
+        string ans;
+        for (char c : s) {
+            if (isalnum(c)) {
+                ans += tolower(c);
+            }
+        }
+
+        // Check if the cleaned string is a palindrome
+        int left = 0;
+        int right = ans.size() - 1;
+        while (left < right) {
+            if (ans[left] != ans[right]) {
                 return false;
-            
+            }
             left++;
             right--;
         }
